@@ -7,28 +7,6 @@
     "openmaptiles:version": "3.x"
   },
   "sources": {
-    "openmaptiles": {
-      "type": "vector",
-      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key={key}"
-    },
-    "natural_earth_shaded_relief": {
-      "maxzoom": 6,
-      "tileSize": 256,
-      "tiles": [
-        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
-      ],
-      "type": "raster"
-    },
-    "bo": {
-      "type": "vector",
-      "tiles": ["http://localhost:3000/bo_boflaeche_mv/{z}/{x}/{y}"],
-      "minZoom": 0,
-      "maxZoom": 14
-    },
-    "bo2": {
-      "type": "vector",
-      "url": "http://localhost:3000/bo_boflaeche_mv/{z}/{x}/{y}"
-    },
     "pg_tileserv": {
       "type": "vector",
       "tiles": [
@@ -38,8 +16,6 @@
       "maxZoom": 14
     }
   },
-  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
-  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
   "layers": [
     {
       "id": "Gebäude",

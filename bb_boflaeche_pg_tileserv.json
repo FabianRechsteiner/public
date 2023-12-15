@@ -1,0 +1,181 @@
+{
+  "version": 8,
+  "name": "OSM Liberty",
+  "metadata": {
+    "maputnik:license": "https://github.com/maputnik/osm-liberty/blob/gh-pages/LICENSE.md",
+    "maputnik:renderer": "mbgljs",
+    "openmaptiles:version": "3.x"
+  },
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key={key}"
+    },
+    "natural_earth_shaded_relief": {
+      "maxzoom": 6,
+      "tileSize": 256,
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "type": "raster"
+    },
+    "bo": {
+      "type": "vector",
+      "tiles": ["http://localhost:3000/bo_boflaeche_mv/{z}/{x}/{y}"],
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "bo2": {
+      "type": "vector",
+      "url": "http://localhost:3000/bo_boflaeche_mv/{z}/{x}/{y}"
+    },
+    "pg_tileserv": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:7800/avprodukt.bo_boflaeche_mv/{z}/{x}/{y}.pbf"
+      ],
+      "minZoom": 0,
+      "maxZoom": 14
+    }
+  },
+  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key={key}",
+  "layers": [
+    {
+      "id": "Gebäude",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": ["all", ["==", "art", "Gebaeude"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(227, 227, 227, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "vegetationslos",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "vegetationslos.Abbau_Deponie"],
+        ["==", "art", "vegetationslos.Fels"],
+        ["==", "art", "vegetationslos.Geroell_Sand"],
+        ["==", "art", "vegetationslos.Gletscher_Firn"],
+        ["==", "art", "vegetationslos.uebrige_vegetationslose"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(216, 255, 231, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "humusiert",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "humusiert.Acker_Wiese_Weide"],
+        ["==", "art", "humusiert.Gartenanlage"],
+        ["==", "art", "humusiert.Hoch_Flachmoor"],
+        ["==", "art", "humusiert.Intensivkultur.Reben"],
+        ["==", "art", "humusiert.Intensivkultur.uebrige_Intensivkultur"],
+        ["==", "art", "humusiert.uebrige_humusierte"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(255, 255, 255, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "bestockt",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "bestockt.geschlossener_Wald"],
+        ["==", "art", "bestockt.uebrige_bestockte"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(198, 232, 216, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "uebrig_befestigt",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "befestigt.Wasserbecken"],
+        ["==", "art", "befestigt.uebrig_befestigte"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(187, 187, 187, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "Trottoir_Verkehrsinsel",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "befestigt.Trottoir"],
+        ["==", "art", "befestigt.Verkehrsinsel"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(227, 227, 230, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "Strasse",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": ["any", ["==", "art", "befestigt.Strasse_Weg"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(210, 213, 216, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "Gewässer",
+      "type": "fill",
+      "source": "pg_tileserv",
+      "source-layer": "avprodukt.bo_boflaeche_mv",
+      "filter": [
+        "any",
+        ["==", "art", "Gewaesser.stehendes"],
+        ["==", "art", "Gewaesser.fliessendes"],
+        ["==", "art", "Gewaesser.Schilfguertel"]
+      ],
+      "paint": {
+        "fill-color": "rgba(169, 188, 216, 1)",
+        "fill-opacity": 1,
+        "fill-translate-anchor": "map"
+      }
+    }
+  ],
+  "id": "osm-liberty"
+}
